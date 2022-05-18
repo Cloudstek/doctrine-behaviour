@@ -39,7 +39,9 @@ Extensive documentation has not been written but have a look at the [tests](./te
 3. Use the matching trait to implement the required methods for the chosen behaviour interface (
    e.g. [TimestampableTrait](./src/TimestampableTrait.php)) or write your own version of it.
 4. In case of timestampable entities, register the [entity listener](./src/Listener/TimestampableListener.php) for your
-   entity, other behaviours don't require a listener.
+   entity, other behaviours don't require a listener. If you want this done automatically, use
+   the [timestampable subscriber](./src/Subscriber/TimestampableSubscriber.php) to have this done automatically for each
+   timestampable entity.
 5. Set up [filters](https://www.doctrine-project.org/projects/doctrine-orm/en/2.11/reference/filters.html) in case of
    expirable or soft-deletable entities. See [ExpirableFilter](./src/Filter/ExpirableFilter.php)
    and [SoftDeleteFilter](./src/Filter/SoftDeleteFilter.php).
