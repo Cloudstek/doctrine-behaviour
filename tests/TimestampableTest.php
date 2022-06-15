@@ -67,27 +67,6 @@ class TimestampableTest extends TestCase
         $this->assertDateTimezoneEquals('UTC', $entity->getCreatedAt());
         $this->assertNull($entity->getUpdatedAt());
     }
-
-    public function testCanUnsetCreatedAt()
-    {
-        $entity = new TestEntity();
-        $date = Carbon::now()->addHours(3);
-        $this->assertDateTimezoneEquals('Europe/Amsterdam', $date);
-
-        $this->assertNull($entity->getCreatedAt());
-        $this->assertNull($entity->getUpdatedAt());
-
-        $entity->setCreatedAt($date);
-
-        $this->assertDateEquals($date, $entity->getCreatedAt());
-        $this->assertDateTimezoneEquals('UTC', $entity->getCreatedAt());
-        $this->assertNull($entity->getUpdatedAt());
-
-        $entity->setCreatedAt(null);
-
-        $this->assertNull($entity->getCreatedAt());
-        $this->assertNull($entity->getUpdatedAt());
-    }
     
     public function testCanSetUpdatedAtWithMutable()
     {
@@ -119,26 +98,5 @@ class TimestampableTest extends TestCase
         $this->assertNull($entity->getCreatedAt());
         $this->assertDateEquals($date, $entity->getUpdatedAt());
         $this->assertDateTimezoneEquals('UTC', $entity->getUpdatedAt());
-    }
-
-    public function testCanUnsetUpdatedAt()
-    {
-        $entity = new TestEntity();
-        $date = Carbon::now()->addHours(3);
-        $this->assertDateTimezoneEquals('Europe/Amsterdam', $date);
-
-        $this->assertNull($entity->getCreatedAt());
-        $this->assertNull($entity->getUpdatedAt());
-
-        $entity->setUpdatedAt($date);
-
-        $this->assertNull($entity->getCreatedAt());
-        $this->assertDateEquals($date, $entity->getUpdatedAt());
-        $this->assertDateTimezoneEquals('UTC', $entity->getUpdatedAt());
-
-        $entity->setUpdatedAt(null);
-
-        $this->assertNull($entity->getCreatedAt());
-        $this->assertNull($entity->getUpdatedAt());
     }
 }

@@ -13,10 +13,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 trait TimestampableTrait
 {
-    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+    #[ORM\Column(type: 'datetime_immutable', nullable: false)]
     protected ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+    #[ORM\Column(type: 'datetime_immutable', nullable: false)]
     protected ?\DateTimeImmutable $updatedAt = null;
 
     /**
@@ -32,11 +32,11 @@ trait TimestampableTrait
     /**
      * Set creation date.
      *
-     * @param \DateTime|\DateTimeImmutable|null $date
+     * @param \DateTime|\DateTimeImmutable $date
      *
      * @return $this
      */
-    public function setCreatedAt(\DateTime|\DateTimeImmutable|null $date): self
+    public function setCreatedAt(\DateTime|\DateTimeImmutable $date): self
     {
         if ($date instanceof \DateTime) {
             $date = \DateTimeImmutable::createFromMutable($date);
@@ -60,11 +60,11 @@ trait TimestampableTrait
     /**
      * Set last updated date.
      *
-     * @param \DateTime|\DateTimeImmutable|null $date
+     * @param \DateTime|\DateTimeImmutable $date
      *
      * @return $this
      */
-    public function setUpdatedAt(\DateTime|\DateTimeImmutable|null $date): self
+    public function setUpdatedAt(\DateTime|\DateTimeImmutable $date): self
     {
         if ($date instanceof \DateTime) {
             $date = \DateTimeImmutable::createFromMutable($date);
