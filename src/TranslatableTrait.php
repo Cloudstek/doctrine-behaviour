@@ -64,6 +64,7 @@ trait TranslatableTrait
 
             if ($existingTranslation !== null && $existingTranslation !== $translation) {
                 $existingTranslation->setTranslatable(null);
+                $this->translations->removeElement($existingTranslation);
             }
 
             // Set translatable.
