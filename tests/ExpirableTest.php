@@ -5,7 +5,7 @@ namespace Cloudstek\DoctrineBehaviour\Tests;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Cloudstek\DoctrineBehaviour\Tests\Assertions\DateAssertions;
-use Cloudstek\DoctrineBehaviour\Tests\Fixtures\TestEntity;
+use Cloudstek\DoctrineBehaviour\Tests\Fixtures\ExpirableEntity;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -37,7 +37,7 @@ class ExpirableTest extends TestCase
 
     public function testCanSetExpiresAtWithMutable()
     {
-        $entity = new TestEntity();
+        $entity = new ExpirableEntity();
         $date = Carbon::now()->addHours(3);
 
         $this->assertNull($entity->getExpiresAt());
@@ -49,7 +49,7 @@ class ExpirableTest extends TestCase
 
     public function testCanSetExpiresAtWithImmutable()
     {
-        $entity = new TestEntity();
+        $entity = new ExpirableEntity();
         $date = CarbonImmutable::now()->addHours(3);
 
         $this->assertNull($entity->getExpiresAt());
@@ -61,7 +61,7 @@ class ExpirableTest extends TestCase
 
     public function testCanUnsetExpiresAt()
     {
-        $entity = new TestEntity();
+        $entity = new ExpirableEntity();
         $date = Carbon::now()->addHours(3);
 
         $this->assertNull($entity->getExpiresAt());
@@ -77,7 +77,7 @@ class ExpirableTest extends TestCase
 
     public function testCanSetExpiresInWithDateInterval()
     {
-        $entity = new TestEntity();
+        $entity = new ExpirableEntity();
         $date = Carbon::now()->addHours(3);
 
         $this->assertNull($entity->getExpiresAt());
@@ -89,7 +89,7 @@ class ExpirableTest extends TestCase
 
     public function testCanSetExpiresInWithString()
     {
-        $entity = new TestEntity();
+        $entity = new ExpirableEntity();
         $date = Carbon::now()->addHours(3);
 
         $this->assertNull($entity->getExpiresAt());
@@ -101,7 +101,7 @@ class ExpirableTest extends TestCase
 
     public function testCanUnsetExpiresIn()
     {
-        $entity = new TestEntity();
+        $entity = new ExpirableEntity();
         $date = Carbon::now()->addHours(3);
 
         $this->assertNull($entity->getExpiresAt());
@@ -117,7 +117,7 @@ class ExpirableTest extends TestCase
 
     public function testIsExpiredWithPastDate()
     {
-        $entity = new TestEntity();
+        $entity = new ExpirableEntity();
         $date = Carbon::now()->subHours(2);
 
         $this->assertNull($entity->getExpiresAt());
@@ -129,7 +129,7 @@ class ExpirableTest extends TestCase
 
     public function testIsExpiredWithCurrentDate()
     {
-        $entity = new TestEntity();
+        $entity = new ExpirableEntity();
         $date = Carbon::now();
 
         $this->assertNull($entity->getExpiresAt());
@@ -141,7 +141,7 @@ class ExpirableTest extends TestCase
 
     public function testIsNotExpiredWithFutureDate()
     {
-        $entity = new TestEntity();
+        $entity = new ExpirableEntity();
         $date = Carbon::now()->addHours(3);
 
         $this->assertNull($entity->getExpiresAt());
@@ -153,7 +153,7 @@ class ExpirableTest extends TestCase
 
     public function testIsNotExpiredWithNoDate()
     {
-        $entity = new TestEntity();
+        $entity = new ExpirableEntity();
 
         $this->assertNull($entity->getExpiresAt());
 
@@ -162,7 +162,7 @@ class ExpirableTest extends TestCase
 
     public function testCanExpireImmediately()
     {
-        $entity = new TestEntity();
+        $entity = new ExpirableEntity();
         $date = Carbon::now();
 
         $this->assertNull($entity->getExpiresAt());
@@ -175,7 +175,7 @@ class ExpirableTest extends TestCase
 
     public function testCanUnexpire()
     {
-        $entity = new TestEntity();
+        $entity = new ExpirableEntity();
         $date = Carbon::now()->addHours(3);
 
         $entity->setExpiresAt($date);

@@ -4,9 +4,8 @@ namespace Cloudstek\DoctrineBehaviour\Tests;
 
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
-use Carbon\CarbonTimeZone;
 use Cloudstek\DoctrineBehaviour\Tests\Assertions\DateAssertions;
-use Cloudstek\DoctrineBehaviour\Tests\Fixtures\TestEntity;
+use Cloudstek\DoctrineBehaviour\Tests\Fixtures\Timestampable\TimestampableEntity;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -38,7 +37,7 @@ class TimestampableTest extends TestCase
 
     public function testCanSetCreatedAtWithMutable()
     {
-        $entity = new TestEntity();
+        $entity = new TimestampableEntity();
         $date = Carbon::now()->addHours(3);
         $this->assertDateTimezoneEquals('Europe/Amsterdam', $date);
 
@@ -54,7 +53,7 @@ class TimestampableTest extends TestCase
 
     public function testCanSetCreatedAtWithImmutable()
     {
-        $entity = new TestEntity();
+        $entity = new TimestampableEntity();
         $date = CarbonImmutable::now()->addHours(3);
         $this->assertDateTimezoneEquals('Europe/Amsterdam', $date);
 
@@ -67,10 +66,10 @@ class TimestampableTest extends TestCase
         $this->assertDateTimezoneEquals('UTC', $entity->getCreatedAt());
         $this->assertNull($entity->getUpdatedAt());
     }
-    
+
     public function testCanSetUpdatedAtWithMutable()
     {
-        $entity = new TestEntity();
+        $entity = new TimestampableEntity();
         $date = Carbon::now()->addHours(3);
         $this->assertDateTimezoneEquals('Europe/Amsterdam', $date);
 
@@ -86,7 +85,7 @@ class TimestampableTest extends TestCase
 
     public function testCanSetUpdatedAtWithImmutable()
     {
-        $entity = new TestEntity();
+        $entity = new TimestampableEntity();
         $date = CarbonImmutable::now()->addHours(3);
         $this->assertDateTimezoneEquals('Europe/Amsterdam', $date);
 

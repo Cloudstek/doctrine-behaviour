@@ -5,7 +5,7 @@ namespace Cloudstek\DoctrineBehaviour\Tests;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Cloudstek\DoctrineBehaviour\Tests\Assertions\DateAssertions;
-use Cloudstek\DoctrineBehaviour\Tests\Fixtures\TestEntity;
+use Cloudstek\DoctrineBehaviour\Tests\Fixtures\SoftDeletableEntity;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -37,7 +37,7 @@ class SoftDeletableTest extends TestCase
 
     public function testCanSetDeletedAtWithMutable()
     {
-        $entity = new TestEntity();
+        $entity = new SoftDeletableEntity();
         $date = Carbon::now();
         $this->assertDateTimezoneEquals('Europe/Amsterdam', $date);
 
@@ -51,7 +51,7 @@ class SoftDeletableTest extends TestCase
 
     public function testCanSetDeletedAtWithImmutable()
     {
-        $entity = new TestEntity();
+        $entity = new SoftDeletableEntity();
         $date = CarbonImmutable::now();
         $this->assertDateTimezoneEquals('Europe/Amsterdam', $date);
 
@@ -65,7 +65,7 @@ class SoftDeletableTest extends TestCase
 
     public function testCanUnsetDeletedAt()
     {
-        $entity = new TestEntity();
+        $entity = new SoftDeletableEntity();
         $date = Carbon::now();
         $this->assertDateTimezoneEquals('Europe/Amsterdam', $date);
 
@@ -83,7 +83,7 @@ class SoftDeletableTest extends TestCase
 
     public function testIsDeletedWithPastDate()
     {
-        $entity = new TestEntity();
+        $entity = new SoftDeletableEntity();
         $date = CarbonImmutable::now()->subHours(2);
         $this->assertDateTimezoneEquals('Europe/Amsterdam', $date);
 
@@ -96,7 +96,7 @@ class SoftDeletableTest extends TestCase
 
     public function testIsDeletedWithCurrentDate()
     {
-        $entity = new TestEntity();
+        $entity = new SoftDeletableEntity();
         $date = CarbonImmutable::now();
         $this->assertDateTimezoneEquals('Europe/Amsterdam', $date);
 
@@ -109,7 +109,7 @@ class SoftDeletableTest extends TestCase
 
     public function testIsDeletedWithFutureDate()
     {
-        $entity = new TestEntity();
+        $entity = new SoftDeletableEntity();
         $date = CarbonImmutable::now()->addHours(3);
 
         $this->assertNull($entity->getDeletedAt());
@@ -121,7 +121,7 @@ class SoftDeletableTest extends TestCase
 
     public function testCanDeleteImmediately()
     {
-        $entity = new TestEntity();
+        $entity = new SoftDeletableEntity();
         $date = Carbon::now();
         $this->assertDateTimezoneEquals('Europe/Amsterdam', $date);
 
@@ -136,7 +136,7 @@ class SoftDeletableTest extends TestCase
 
     public function testCanRecoverImmediately()
     {
-        $entity = new TestEntity();
+        $entity = new SoftDeletableEntity();
         $date = Carbon::now();
         $this->assertDateTimezoneEquals('Europe/Amsterdam', $date);
 

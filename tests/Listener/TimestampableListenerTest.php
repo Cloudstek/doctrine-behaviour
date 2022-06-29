@@ -6,8 +6,8 @@ use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Cloudstek\DoctrineBehaviour\Listener\TimestampableListener;
 use Cloudstek\DoctrineBehaviour\Tests\Assertions\DateAssertions;
-use Cloudstek\DoctrineBehaviour\Tests\Fixtures\TestEntity;
-use Cloudstek\DoctrineBehaviour\Tests\Fixtures\TestEntityWithoutInterfaces;
+use Cloudstek\DoctrineBehaviour\Tests\Fixtures\Timestampable\TimestampableEntity;
+use Cloudstek\DoctrineBehaviour\Tests\Fixtures\Timestampable\TimestampableEntityWithoutInterfaces;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
@@ -44,7 +44,7 @@ class TimestampableListenerTest extends TestCase
 
     public function testPrePersistWithoutDatesSet(): void
     {
-        $entity = new TestEntity();
+        $entity = new TimestampableEntity();
         $listener = new TimestampableListener();
         $objectManager = $this->createStub(ObjectManager::class);
 
@@ -66,7 +66,7 @@ class TimestampableListenerTest extends TestCase
 
     public function testPrePersistWithCreationDateSet(): void
     {
-        $entity = new TestEntity();
+        $entity = new TimestampableEntity();
         $listener = new TimestampableListener();
         $objectManager = $this->createStub(ObjectManager::class);
 
@@ -94,7 +94,7 @@ class TimestampableListenerTest extends TestCase
 
     public function testPrePersistWithBothDatesSet(): void
     {
-        $entity = new TestEntity();
+        $entity = new TimestampableEntity();
         $listener = new TimestampableListener();
         $objectManager = $this->createStub(ObjectManager::class);
 
@@ -123,7 +123,7 @@ class TimestampableListenerTest extends TestCase
 
     public function testPrePersistWithNonTimestampableEntity(): void
     {
-        $entity = new TestEntityWithoutInterfaces();
+        $entity = new TimestampableEntityWithoutInterfaces();
         $listener = new TimestampableListener();
         $objectManager = $this->createStub(ObjectManager::class);
 
@@ -141,7 +141,7 @@ class TimestampableListenerTest extends TestCase
 
     public function testPreUpdateWithNonTimestampableEntity(): void
     {
-        $entity = new TestEntityWithoutInterfaces();
+        $entity = new TimestampableEntityWithoutInterfaces();
         $listener = new TimestampableListener();
         $em = $this->createStub(EntityManagerInterface::class);
 
@@ -160,7 +160,7 @@ class TimestampableListenerTest extends TestCase
 
     public function testPreUpdateWithoutDatesSet(): void
     {
-        $entity = new TestEntity();
+        $entity = new TimestampableEntity();
         $listener = new TimestampableListener();
         $em = $this->createStub(EntityManagerInterface::class);
 
@@ -182,7 +182,7 @@ class TimestampableListenerTest extends TestCase
 
     public function testPreUpdateWithCreationDateSet(): void
     {
-        $entity = new TestEntity();
+        $entity = new TimestampableEntity();
         $listener = new TimestampableListener();
         $em = $this->createStub(EntityManagerInterface::class);
 
@@ -211,7 +211,7 @@ class TimestampableListenerTest extends TestCase
 
     public function testPreUpdateWithBothDatesSet(): void
     {
-        $entity = new TestEntity();
+        $entity = new TimestampableEntity();
         $listener = new TimestampableListener();
         $em = $this->createStub(EntityManagerInterface::class);
 
