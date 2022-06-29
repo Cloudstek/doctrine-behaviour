@@ -66,7 +66,7 @@ trait TranslatableTrait
                 $existingTranslation->setTranslatable(null);
             }
 
-            // Set translation.
+            // Set translatable.
             $translation->setTranslatable($this);
 
             $this->translations->set($locale, $translation);

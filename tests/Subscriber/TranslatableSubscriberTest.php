@@ -184,9 +184,10 @@ class TranslatableSubscriberTest extends AbstractSubscriberTestCase
         );
 
         // Check unique constraints
-        $this->assertNotEmpty($metadata->table['uniqueConstraints'] ?? []);
+        // FIXME: Unique constraint currently breaks due to a wrong order in the unit of work, see for example: https://github.com/doctrine/orm/issues/6776
+        $this->assertEmpty($metadata->table['uniqueConstraints'] ?? []);
 
-        $this->assertEquals(
+        $this->assertNotEquals(
             [
                 "{$metadata->getTableName()}_uniq_trans" => [
                     'columns' => [
@@ -195,7 +196,7 @@ class TranslatableSubscriberTest extends AbstractSubscriberTestCase
                     ]
                 ]
             ],
-            $metadata->table['uniqueConstraints']
+            $metadata->table['uniqueConstraints'] ?? []
         );
     }
 
