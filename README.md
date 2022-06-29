@@ -1,11 +1,14 @@
 # Cloudstek Doctrine Behaviour
 
+[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fcloudstek%2Fdoctrine-behaviour%2Fbadge%3Fref%3Dmain&style=flat)](https://github.com/Cloudstek/doctrine-behaviour/actions) [![issues](https://img.shields.io/github/issues/cloudstek/doctrine-behaviour)](https://github.com/Cloudstek/doctrine-behaviour/issues) [![license](https://img.shields.io/github/license/cloudstek/doctrine-behaviour)](https://github.com/Cloudstek/doctrine-behaviour/blob/main/LICENSE) [![dependencies](https://img.shields.io/librariesio/github/cloudstek/doctrine-behaviour)](https://libraries.io/packagist/cloudstek%2Fdoctrine-behaviour) [![downloads](https://img.shields.io/packagist/dt/cloudstek/doctrine-behaviour)](https://packagist.org/packages/cloudstek/doctrine-behaviour)
+
 > Library of different entity behaviours (timestampable etc.)
 
 ## Requirements
 
 - PHP 8.1+
 - Doctrine ORM 2
+- intl extension
 
 ## Installation
 
@@ -13,35 +16,20 @@
 $ composer require cloudstek/doctrine-behaviour
 ```
 
-## Behaviours
+## Running tests
 
-### Timestampable
+```
+$ composer run-script test
+```
 
-Adds createdAt and updatedAt properties to an entity. A listener automatically makes sure these properties are populated
-on creation and updating.
+## Documentation
 
-### Expirable
+Please see the [docs](./docs/README.md) folder for available behaviours and their documentation.
 
-Adds expiredAt property to an entity with methods to for example easily expire and unexpire the entity. Use
-the [expirable filter](./src/Filter/ExpirableFilter.php) to filter expired entities from query results.
+## License
 
-### Soft-deletable
+MIT
 
-Adds deletedAt property to an entity with methods to for example easily soft-delete and recover the entity. Use
-the [soft-delete filter](./src/Filter/SoftDeleteFilter.php) to filter soft-deleted entities from query results.
+## Changelog
 
-## Usage
-
-Extensive documentation has not been written but have a look at the [tests](./tests).
-
-1. Create your entity class
-2. Make it implement the behaviour interface (e.g. [TimestampableInterface](./src/TimestampableInterface.php))
-3. Use the matching trait to implement the required methods for the chosen behaviour interface (
-   e.g. [TimestampableTrait](./src/TimestampableTrait.php)) or write your own version of it.
-4. In case of timestampable entities, register the [entity listener](./src/Listener/TimestampableListener.php) for your
-   entity, other behaviours don't require a listener. If you want this done automatically, use
-   the [timestampable subscriber](./src/Subscriber/TimestampableSubscriber.php) to have this done automatically for each
-   timestampable entity.
-5. Set up [filters](https://www.doctrine-project.org/projects/doctrine-orm/en/2.11/reference/filters.html) in case of
-   expirable or soft-deletable entities. See [ExpirableFilter](./src/Filter/ExpirableFilter.php)
-   and [SoftDeleteFilter](./src/Filter/SoftDeleteFilter.php).
+See [CHANGELOG](./CHANGELOG.md)
