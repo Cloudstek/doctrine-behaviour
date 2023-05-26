@@ -32,17 +32,17 @@ trait TimestampableTrait
     /**
      * Set creation date.
      *
-     * @param \DateTime|\DateTimeImmutable $date
+     * @param \DateTimeInterface $date
      *
      * @return $this
      */
-    public function setCreatedAt(\DateTime|\DateTimeImmutable $date): self
+    public function setCreatedAt(\DateTimeInterface $date): self
     {
-        if ($date instanceof \DateTime) {
-            $date = \DateTimeImmutable::createFromMutable($date);
+        if ($date instanceof \DateTimeImmutable === false) {
+            $date = \DateTimeImmutable::createFromInterface($date);
         }
 
-        $this->createdAt = $date?->setTimezone(new \DateTimeZone('UTC'));;
+        $this->createdAt = $date->setTimezone(new \DateTimeZone('UTC'));;
 
         return $this;
     }
@@ -60,17 +60,17 @@ trait TimestampableTrait
     /**
      * Set last updated date.
      *
-     * @param \DateTime|\DateTimeImmutable $date
+     * @param \DateTimeInterface $date
      *
      * @return $this
      */
-    public function setUpdatedAt(\DateTime|\DateTimeImmutable $date): self
+    public function setUpdatedAt(\DateTimeInterface $date): self
     {
-        if ($date instanceof \DateTime) {
-            $date = \DateTimeImmutable::createFromMutable($date);
+        if ($date instanceof \DateTimeImmutable === false) {
+            $date = \DateTimeImmutable::createFromInterface($date);
         }
 
-        $this->updatedAt = $date?->setTimezone(new \DateTimeZone('UTC'));;
+        $this->updatedAt = $date->setTimezone(new \DateTimeZone('UTC'));;
 
         return $this;
     }

@@ -30,19 +30,17 @@ trait ExpirableTrait
     /**
      * Set expiration date.
      *
-     * @param \DateTimeImmutable|\DateTime|null $date
+     * @param \DateTimeInterface|null $date
      *
      * @return $this
      */
-    public function setExpiresAt(\DateTimeImmutable|\DateTime|null $date): self
+    public function setExpiresAt(?\DateTimeInterface $date): self
     {
-        if ($date instanceof \DateTime) {
-            $date = \DateTimeImmutable::createFromMutable($date);
+        if ($date !== null && $date instanceof \DateTimeImmutable === false) {
+            $date = \DateTimeImmutable::createFromInterface($date);
         }
 
-        $date?->setTimezone(new \DateTimeZone('UTC'));
-
-        $this->expiresAt = $date;
+        $this->expiresAt = $date?->setTimezone(new \DateTimeZone('UTC'));
 
         return $this;
     }

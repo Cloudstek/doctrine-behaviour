@@ -31,14 +31,14 @@ trait SoftDeletableTrait
     /**
      * Set deletion date.
      *
-     * @param \DateTime|\DateTimeImmutable|null $date
+     * @param \DateTimeInterface|null $date
      *
      * @return $this
      */
-    public function setDeletedAt(\DateTime|\DateTimeImmutable|null $date): self
+    public function setDeletedAt(?\DateTimeInterface $date): self
     {
-        if ($date instanceof \DateTime) {
-            $date = \DateTimeImmutable::createFromMutable($date);
+        if ($date !== null && $date instanceof \DateTimeImmutable === false) {
+            $date = \DateTimeImmutable::createFromInterface($date);
         }
 
         $this->deletedAt = $date?->setTimezone(new \DateTimeZone('UTC'));

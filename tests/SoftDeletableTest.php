@@ -4,13 +4,13 @@ namespace Cloudstek\DoctrineBehaviour\Tests;
 
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
+use Cloudstek\DoctrineBehaviour\SoftDeletableTrait;
 use Cloudstek\DoctrineBehaviour\Tests\Assertions\DateAssertions;
 use Cloudstek\DoctrineBehaviour\Tests\Fixtures\SoftDeletableEntity;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Cloudstek\DoctrineBehaviour\SoftDeletableTrait
- */
+#[CoversClass(SoftDeletableTrait::class)]
 class SoftDeletableTest extends TestCase
 {
     use DateAssertions;

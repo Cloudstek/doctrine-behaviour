@@ -19,11 +19,11 @@ interface TimestampableInterface
     /**
      * Set creation date.
      *
-     * @param \DateTime|\DateTimeImmutable $date
+     * @param \DateTimeInterface $date
      *
      * @return $this
      */
-    public function setCreatedAt(\DateTime|\DateTimeImmutable $date): self;
+    public function setCreatedAt(\DateTimeInterface $date): self;
 
     /**
      * Get last updated date.
@@ -35,9 +35,9 @@ interface TimestampableInterface
     /**
      * Set last updated date.
      *
-     * @param \DateTime|\DateTimeImmutable $date
+     * @param \DateTimeInterface $date
      *
      * @return $this
      */
-    public function setUpdatedAt(\DateTime|\DateTimeImmutable $date): self;
+    public function setUpdatedAt(\DateTimeInterface $date): self;
 }

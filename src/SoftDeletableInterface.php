@@ -19,11 +19,11 @@ interface SoftDeletableInterface
     /**
      * Set deletion date.
      *
-     * @param \DateTime|\DateTimeImmutable|null $date
+     * @param \DateTimeInterface|null $date
      *
      * @return $this
      */
-    public function setDeletedAt(\DateTime|\DateTimeImmutable|null $date): self;
+    public function setDeletedAt(?\DateTimeInterface $date): self;
 
     /**
      * Get if entity has been soft-deleted.
