@@ -10,6 +10,7 @@ use Cloudstek\DoctrineBehaviour\Tests\Fixtures\Timestampable\TimestampableEntity
 use Cloudstek\DoctrineBehaviour\Tests\Fixtures\Timestampable\TimestampableEntityWithoutInterfaces;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\PrePersistEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\Persistence\ObjectManager;
 use PHPUnit\Framework\TestCase;
@@ -46,7 +47,7 @@ class TimestampableListenerTest extends TestCase
     {
         $entity = new TimestampableEntity();
         $listener = new TimestampableListener();
-        $objectManager = $this->createStub(ObjectManager::class);
+        $em = $this->createStub(EntityManagerInterface::class);
 
         $date = Carbon::now();
         $this->assertDateTimezoneEquals('Europe/Amsterdam', $date);
@@ -54,7 +55,7 @@ class TimestampableListenerTest extends TestCase
         $this->assertNull($entity->getCreatedAt());
         $this->assertNull($entity->getUpdatedAt());
 
-        $listener->prePersist($entity, new LifecycleEventArgs($entity, $objectManager));
+        $listener->prePersist($entity, new PrePersistEventArgs($entity, $em));
 
         // Make sure createdAt and updatedAt are current time
         $this->assertDateEquals($date, $entity->getCreatedAt());
@@ -68,7 +69,7 @@ class TimestampableListenerTest extends TestCase
     {
         $entity = new TimestampableEntity();
         $listener = new TimestampableListener();
-        $objectManager = $this->createStub(ObjectManager::class);
+        $em = $this->createStub(EntityManagerInterface::class);
 
         $now = CarbonImmutable::now();
         $created = $now->subHours(3);
@@ -81,7 +82,7 @@ class TimestampableListenerTest extends TestCase
         $this->assertDateTimezoneEquals('UTC', $entity->getCreatedAt());
         $this->assertNull($entity->getUpdatedAt());
 
-        $listener->prePersist($entity, new LifecycleEventArgs($entity, $objectManager));
+        $listener->prePersist($entity, new PrePersistEventArgs($entity, $em));
 
         // Make sure createdAt is not modified
         $this->assertDateEquals($created, $entity->getCreatedAt());
@@ -96,7 +97,7 @@ class TimestampableListenerTest extends TestCase
     {
         $entity = new TimestampableEntity();
         $listener = new TimestampableListener();
-        $objectManager = $this->createStub(ObjectManager::class);
+        $em = $this->createStub(EntityManagerInterface::class);
 
         $now = CarbonImmutable::now();
         $created = $now->subHours(3);
@@ -111,7 +112,7 @@ class TimestampableListenerTest extends TestCase
         $this->assertDateEquals($created, $entity->getUpdatedAt());
         $this->assertDateTimezoneEquals('UTC', $entity->getUpdatedAt());
 
-        $listener->prePersist($entity, new LifecycleEventArgs($entity, $objectManager));
+        $listener->prePersist($entity, new PrePersistEventArgs($entity, $em));
 
         // Make sure createdAt and updatedAt are not modified
         $this->assertDateEquals($created, $entity->getCreatedAt());
@@ -125,7 +126,7 @@ class TimestampableListenerTest extends TestCase
     {
         $entity = new TimestampableEntityWithoutInterfaces();
         $listener = new TimestampableListener();
-        $objectManager = $this->createStub(ObjectManager::class);
+        $em = $this->createStub(EntityManagerInterface::class);
 
         $date = Carbon::now();
         $this->assertDateTimezoneEquals('Europe/Amsterdam', $date);
@@ -133,7 +134,7 @@ class TimestampableListenerTest extends TestCase
         $this->assertNull($entity->getCreatedAt());
         $this->assertNull($entity->getUpdatedAt());
 
-        $listener->prePersist($entity, new LifecycleEventArgs($entity, $objectManager));
+        $listener->prePersist($entity, new PrePersistEventArgs($entity, $em));
 
         $this->assertNull($entity->getCreatedAt());
         $this->assertNull($entity->getUpdatedAt());

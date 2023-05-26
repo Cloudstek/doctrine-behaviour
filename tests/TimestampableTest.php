@@ -6,11 +6,11 @@ use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Cloudstek\DoctrineBehaviour\Tests\Assertions\DateAssertions;
 use Cloudstek\DoctrineBehaviour\Tests\Fixtures\Timestampable\TimestampableEntity;
+use Cloudstek\DoctrineBehaviour\TimestampableTrait;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Cloudstek\DoctrineBehaviour\TimestampableTrait
- */
+#[CoversClass(TimestampableTrait::class)]
 class TimestampableTest extends TestCase
 {
     use DateAssertions;

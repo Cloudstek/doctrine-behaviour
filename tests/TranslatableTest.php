@@ -6,20 +6,18 @@ use Cloudstek\DoctrineBehaviour\Exception\TranslationNotFoundException;
 use Cloudstek\DoctrineBehaviour\Tests\Fixtures\Translatable\OtherEntityTranslation;
 use Cloudstek\DoctrineBehaviour\Tests\Fixtures\Translatable\TranslatableEntity;
 use Cloudstek\DoctrineBehaviour\Tests\Fixtures\Translatable\TranslatableEntityTranslation;
+use Cloudstek\DoctrineBehaviour\TranslatableTrait;
 use Cloudstek\DoctrineBehaviour\TranslationInterface;
+use Cloudstek\DoctrineBehaviour\TranslationTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait
- * @covers \Cloudstek\DoctrineBehaviour\TranslationTrait
- */
+#[CoversClass(TranslatableTrait::class)]
+#[CoversClass(TranslationTrait::class)]
 class TranslatableTest extends TestCase
 {
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait::initTranslations()
-     */
     public function testCanInitialiseEmpty(): void
     {
         $entity = new TranslatableEntity();
@@ -30,9 +28,6 @@ class TranslatableTest extends TestCase
         $this->assertTrue($translations->isEmpty());
     }
 
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait::initTranslations()
-     */
     public function testCanInitialiseWithArray(): void
     {
         $englishTranslation = new TranslatableEntityTranslation('en');
@@ -54,9 +49,6 @@ class TranslatableTest extends TestCase
         $this->assertArrayHasKey('de', $translations);
     }
 
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait::initTranslations()
-     */
     public function testCanInitialiseWithArrayCollection(): void
     {
         $englishTranslation = new TranslatableEntityTranslation('en');
@@ -80,9 +72,6 @@ class TranslatableTest extends TestCase
         $this->assertArrayHasKey('de', $translations);
     }
 
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait::initTranslations()
-     */
     public function testCanInitialiseWithArrayContainingDuplicates(): void
     {
         $englishTranslation1 = new TranslatableEntityTranslation('en');
@@ -115,9 +104,6 @@ class TranslatableTest extends TestCase
         $this->assertArrayHasKey('de', $translations);
     }
 
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait::initTranslations()
-     */
     public function testCanInitialiseWithArrayCollectionContainingDuplicates(): void
     {
         $englishTranslation1 = new TranslatableEntityTranslation('en');
@@ -152,9 +138,6 @@ class TranslatableTest extends TestCase
         $this->assertArrayHasKey('de', $translations);
     }
 
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait::initTranslations()
-     */
     public function testThrowsExceptionOnInitWithInvalidTranslation(): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -168,9 +151,6 @@ class TranslatableTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait::initTranslations()
-     */
     public function testThrowsExceptionOnInitWithTranslationOfOtherEntity(): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -184,9 +164,6 @@ class TranslatableTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait::cloneTranslations()
-     */
     public function testCanClone(): void
     {
         $entity = new TranslatableEntity(
@@ -224,9 +201,6 @@ class TranslatableTest extends TestCase
         }
     }
 
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait::addTranslation()
-     */
     public function testCanAddTranslation(): void
     {
         $entity = new TranslatableEntity();
@@ -241,9 +215,6 @@ class TranslatableTest extends TestCase
         $this->assertSame($entity, $translation->getTranslatable());
     }
 
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait::addTranslation()
-     */
     public function testThrowsExceptionOnAddWithTranslationOfOtherEntity(): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -254,9 +225,6 @@ class TranslatableTest extends TestCase
         $entity->addTranslation(new OtherEntityTranslation('en'));
     }
 
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait::removeTranslation()
-     */
     public function testCanRemoveTranslation(): void
     {
         $translationToRemove = new TranslatableEntityTranslation('en');
@@ -285,9 +253,6 @@ class TranslatableTest extends TestCase
         $this->assertArrayNotHasKey('en', $translations);
     }
 
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait::hasTranslation()
-     */
     public function testHasTranslation(): void
     {
         $entity = new TranslatableEntity(
@@ -309,9 +274,6 @@ class TranslatableTest extends TestCase
         $this->assertFalse($entity->hasTranslation('en_US'));
     }
 
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait::hasTranslation()
-     */
     public function testHasTranslationThrowsOnInvalidLocale(): void
     {
         $entity = new TranslatableEntity();
@@ -325,9 +287,6 @@ class TranslatableTest extends TestCase
         $entity->hasTranslation($locale);
     }
 
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait::setTranslations()
-     */
     public function testCanSetTranslationsWhenEmpty(): void
     {
         $entity = new TranslatableEntity();
@@ -355,9 +314,6 @@ class TranslatableTest extends TestCase
         $this->assertSame($entity, $translations['nl']->getTranslatable());
     }
 
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait::setTranslations()
-     */
     public function testSetTranslationsRemovesOtherTranslations(): void
     {
         $entity = new TranslatableEntity(
@@ -391,9 +347,6 @@ class TranslatableTest extends TestCase
         $this->assertArrayNotHasKey('de', $translations);
     }
 
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait::setTranslations()
-     */
     public function testSetTranslationsReplacesExistingTranslationsOfNewInstance(): void
     {
         $existingTranslation = new TranslatableEntityTranslation('en');
@@ -429,9 +382,6 @@ class TranslatableTest extends TestCase
         $this->assertNull($existingTranslation->getTranslatable());
     }
 
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait::setTranslations()
-     */
     public function testSetTranslationsIgnoresExistingTranslationsOfSameInstance(): void
     {
         $existingTranslation = new TranslatableEntityTranslation('en');
@@ -467,9 +417,6 @@ class TranslatableTest extends TestCase
         $this->assertSame($entity, $existingTranslation->getTranslatable());
     }
 
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait::addTranslation()
-     */
     public function testThrowsExceptionOnSetTranslationsWithTranslationOfOtherEntity(): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -485,9 +432,6 @@ class TranslatableTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait::translate()
-     */
     public function testTranslateEmptyWithNewLocale(): void
     {
         $entity = new TranslatableEntity();
@@ -508,9 +452,6 @@ class TranslatableTest extends TestCase
         $this->assertSame($newTranslation, $translations['en']);
     }
 
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait::translate()
-     */
     public function testTranslateWithNewLocale(): void
     {
         $entity = new TranslatableEntity(
@@ -537,9 +478,6 @@ class TranslatableTest extends TestCase
         $this->assertSame($newTranslation, $translations['en']);
     }
 
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait::translate()
-     */
     public function testTranslateWithExistingLocale(): void
     {
         $entity = new TranslatableEntity();
@@ -562,9 +500,6 @@ class TranslatableTest extends TestCase
         $this->assertSame($entity->translate('en'), $newTranslation);
     }
 
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait::translate()
-     */
     public function testTranslateThrowsOnInvalidLocale(): void
     {
         $entity = new TranslatableEntity();
@@ -578,9 +513,6 @@ class TranslatableTest extends TestCase
         $entity->translate($locale);
     }
 
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait::translate()
-     */
     public function testTranslateReturnsFirstTranslationInArray(): void
     {
         $entity = new TranslatableEntity(
@@ -606,9 +538,6 @@ class TranslatableTest extends TestCase
         $this->assertSame($entity, $translation->getTranslatable());
     }
 
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait::translate()
-     */
     public function testTranslateReturnsFallbackTranslationInArray(): void
     {
         $entity = new TranslatableEntity(
@@ -634,9 +563,6 @@ class TranslatableTest extends TestCase
         $this->assertSame($entity, $translation->getTranslatable());
     }
 
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslatableTrait::translate()
-     */
     public function testTranslateThrowsWhenTranslationNotFoundInArray(): void
     {
         $entity = new TranslatableEntity(
@@ -660,9 +586,6 @@ class TranslatableTest extends TestCase
         $entity->translate(['it', 'fr']);
     }
 
-    /**
-     * @covers \Cloudstek\DoctrineBehaviour\TranslationTrait::setLocale()
-     */
     public function testThrowsExceptionOnSetInvalidLocaleOnTranslation(): void
     {
         $translation = new TranslatableEntityTranslation();

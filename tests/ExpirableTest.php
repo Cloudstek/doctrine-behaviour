@@ -4,13 +4,13 @@ namespace Cloudstek\DoctrineBehaviour\Tests;
 
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
+use Cloudstek\DoctrineBehaviour\ExpirableTrait;
 use Cloudstek\DoctrineBehaviour\Tests\Assertions\DateAssertions;
 use Cloudstek\DoctrineBehaviour\Tests\Fixtures\ExpirableEntity;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Cloudstek\DoctrineBehaviour\ExpirableTrait
- */
+#[CoversClass(ExpirableTrait::class)]
 class ExpirableTest extends TestCase
 {
     use DateAssertions;

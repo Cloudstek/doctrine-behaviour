@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0] - 2023-05-24
+### Changed
+- Allow DateTimeInterface in setters instead of just DateTime and DateTimeImmutable
+- Update to PHPUnit 10.1
+
 ## [2.0.2] - 2022-06-29
 ### Added
 - More documentation and examples
@@ -28,7 +33,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Timestampable subscriber to automatically add entity listener to timestampable entities.
 
-[Unreleased]: https://github.com/Cloudstek/doctrine-behaviour/compare/v2.0.2...develop
+[Unreleased]: https://github.com/Cloudstek/doctrine-behaviour/compare/v2.1.0...develop
+[2.1.0]: https://github.com/Cloudstek/doctrine-behaviour/compare/v2.0.2...v2.1.0
 [2.0.2]: https://github.com/Cloudstek/doctrine-behaviour/compare/v2.0.1...v2.0.2
 [2.0.1]: https://github.com/Cloudstek/doctrine-behaviour/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/Cloudstek/doctrine-behaviour/compare/v1.0.1...v2.0.0

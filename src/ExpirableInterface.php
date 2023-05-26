@@ -19,11 +19,11 @@ interface ExpirableInterface
     /**
      * Set expiration date.
      *
-     * @param \DateTime|\DateTimeImmutable|null $date
+     * @param \DateTimeInterface|null $date
      *
      * @return $this
      */
-    public function setExpiresAt(\DateTimeImmutable|\DateTime|null $date): self;
+    public function setExpiresAt(?\DateTimeInterface $date): self;
 
     /**
      * Expire in x years/months/days/hours ...
