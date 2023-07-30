@@ -4,6 +4,8 @@
 
 > Library of different entity behaviours (timestampable etc.)
 
+> :warning: Development has moved to [mdeboer/doctrine-behaviour]([https://github.com/mdeboer/doctrine-behaviour](https://github.com/mdeboer/doctrine-behaviour/releases/tag/v3.0.0)). If you want to receive updates, please replace the package `cloudstek/doctrine-behaviour` with `mdeboer/doctrine-behaviour` and replace all usages of the namespace `Cloudstek\DoctrineBehaviour` with `mdeboer\DoctrineBehaviour`. Version v3.0.0 is API compatible with v2.1.0.
+
 ## Requirements
 
 - PHP 8.1+
